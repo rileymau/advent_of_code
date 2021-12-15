@@ -77,13 +77,13 @@ def count_moves(move_list):
     horizontal = 0
 
     # check if word is forward, up, down (f, u, d)
-    #if it is forward, add number to horizontal
+    # if it is forward, add number to horizontal
     for k, item in enumerate(move_list):
         if k % 2 == 0:
             if item == 'forward':
                 horizontal += int(move_list[k + 1])
                 # will not go out of range, will always have number after last diretion
-            
+
     # if it is up or down, add/subtract number to depth
     # depth is a positive number going down
             if item == 'up':
@@ -93,10 +93,46 @@ def count_moves(move_list):
     print(horizontal)
     print(depth)
     print(depth * horizontal)
-    return(depth * horizontal)
+    return depth * horizontal
 
 count_moves(moves)
 # got 1427868
 
 
 ## Day 2 Part 2 ##
+
+def count_aim(move_list):
+    """takes list of moves and returns total depth * horiontal moves"""
+    depth = 0
+    horizontal = 0
+    aim = 0
+
+    # check if word is forward, up, down (f, u, d)
+    # if it is forward, add number to horizontal
+    # fwd increases depth by aim * x
+    for k, item in enumerate(move_list):
+        if k % 2 == 0:
+            num = int(move_list[k + 1])
+            if item == 'forward':
+                horizontal += num
+                depth += (aim * num)
+
+    # if it is up or down, add/subtract number to depth
+    # depth is a positive number going down
+    # down increases aim by x
+    # up decreases aim by x
+            if item == 'up':
+                #depth -= num
+                aim -= num
+            if item == 'down':
+                #depth += num
+                aim += num
+    print(horizontal)
+    print(depth)
+    print(depth * horizontal)
+    return depth * horizontal
+
+count_aim(moves)
+# got 1568138742, right answer
+# 1569566610 too high
+# 1566710874 too low
