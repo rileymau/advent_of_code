@@ -199,3 +199,121 @@ find_gamma(day3)
 
 
 ## Day 3 Part 2 ##
+
+# oxygen, keep most common in that position, or 1 if equal.
+# scrubber, keep least common in that position, or 0 if equal.
+# life support is decimal of oxygen multiplied by decimal of scrubber.
+
+# from part 1, 0 most common in first postion: 
+# gamma =  [0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1]
+# epsilon =  [1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
+
+def find_life_support(lst):
+    """take day3 list and find oxygen and scrubber numbers, return life support number"""
+    oxygen = []
+    scrubber = []
+
+    # get oxygen number
+    new = []
+    for day in lst:
+        if day[0] == '0':
+            new.append(day)
+    print("new ", new)
+
+    def find_oxygen(new, num):
+        """recursive, find oxygen number"""
+
+        # return if on last index
+        if num == 11:
+            print("final new is ", new[0])
+            return(new[0])
+
+        # return if only one number left
+        if len(new) == 1:
+            print("final new is ", new[0])
+            return(new[0])
+
+        zero = 0
+        one = 0
+        for day in new:
+            if day[num] == '0':
+                zero += 1
+            elif day[num] == '1':
+                one += 1
+        print("zero is ", zero)
+        print("one is ", one)
+
+        # get most common number in the spot
+        # or 1 if equal
+        # make a new list with that number
+        if zero > one:  #number of zeros to ones
+            new = [x for x in new if x[num] == '0']
+        elif one > zero: 
+            new = [x for x in new if x[num] == '1']
+        elif one == zero:  #number of zeros to ones
+            new = [x for x in new if x[num] == '1']
+
+        # repeat until 1 number left or index == 11
+        print("new is ", new)
+        return find_oxygen(new, num + 1)
+
+    num = 1
+    oxygen = find_oxygen(new, num)
+    print(oxygen)
+
+    # get scrubber number
+    def find_scrubber(newS, numS):
+        """recursive, find scrubber number"""
+
+        # return if on last index
+        if numS == 11:
+            print("final new scrubber is ", newS[0])
+            return(newS[0])
+
+        # return if only one number left
+        if len(newS) == 1:
+            print("final new scrubber is ", newS[0])
+            return(newS[0])
+
+        zeroS = 0
+        oneS = 0
+        for day in newS:
+            if day[numS] == '0':
+                zeroS += 1
+            elif day[numS] == '1':
+                oneS += 1
+        print("zeroS is ", zeroS)
+        print("oneS is ", oneS)
+
+        # get least common number in the spot
+        # or 0 if equal
+        # make a new list with that number
+        if zeroS < oneS:  
+            newS = [x for x in newS if x[numS] == '0']
+        elif oneS < zeroS: #number of zeros to ones
+            newS = [x for x in newS if x[numS] == '1']
+        elif oneS == zeroS:  #number of zeros to ones
+            newS = [x for x in newS if x[numS] == '0']
+
+        # repeat until 1 number left or index == 11
+        print("newS is ", newS)
+        return find_scrubber(newS, numS + 1)
+
+    numS = 0
+    newS = lst
+    scrubber = find_scrubber(newS, numS)
+    print(scrubber)
+    
+
+    #convert oxygen and scrubber to binary
+    oxygen = int(oxygen, 2)
+    scrubber = int(scrubber, 2)
+    print("oxygen, scrubber is ", oxygen, scrubber)
+
+    #caluclate life support and return
+    life = oxygen * scrubber
+    print("life support is ", life)
+    return life
+
+find_life_support(day3)
+# got
