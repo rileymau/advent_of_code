@@ -25,7 +25,7 @@ def make_counter(lst):
         if lst[i] < lst[i + 1]:
             counter += 1
         i += 1
-    print(counter)
+    #print(counter)
     return counter
 
 make_counter(txt3)
@@ -51,7 +51,7 @@ while j < (len(txt3) - 2):
 
 # triples.append(txt3[-2] + txt3[-1])
 # triples.append(txt3[-1])
-print(triples)
+#print(triples)
 
 # update make_counter function to take a lst
 # check list for increeases as in part 1
@@ -69,7 +69,7 @@ moves = moves.read()
 
 # make list of data
 moves = moves.strip().split()
-print(moves)
+#print(moves)
 
 def count_moves(move_list):
     """takes list of moves and returns total depth * horiontal moves"""
@@ -90,9 +90,9 @@ def count_moves(move_list):
                 depth -= int(move_list[k + 1])
             if item == 'down':
                 depth += int(move_list[k + 1])
-    print(horizontal)
-    print(depth)
-    print(depth * horizontal)
+    #print(horizontal)
+    #print(depth)
+    #print(depth * horizontal)
     return depth * horizontal
 
 count_moves(moves)
@@ -127,12 +127,75 @@ def count_aim(move_list):
             if item == 'down':
                 #depth += num
                 aim += num
-    print(horizontal)
-    print(depth)
-    print(depth * horizontal)
+    #print(horizontal)
+    #print(depth)
+    #print(depth * horizontal)
     return depth * horizontal
 
 count_aim(moves)
 # got 1568138742, right answer
 # 1569566610 too high
 # 1566710874 too low
+
+
+## Day 3 Part 1 ##
+
+# open file and read
+day3 = open('input_d3')
+day3 = day3.read()
+
+# make list of data
+day3 = day3.strip().split()
+#print(day3)
+
+
+def find_gamma(lst):
+    """find gamma and epsilon for power consumption"""
+    gamma = []
+    epsilon = []
+    zeros = [0] * 12
+    ones = [0] * 12
+
+    #count zeros and ones for each digit and append to gamma or epsilon
+    for day in lst:
+        #print(day)
+        for i, num in enumerate(day): 
+            if num == '0':
+                zeros[i] += 1
+            elif num == '1':
+                ones[i] += 1
+    print("0's = ", zeros)
+    print("1's = ", ones)
+
+    # if ones higher, gamma gets 1 and epsilon gets 0
+    # otherwise, opposite
+    for i in range(12):
+        if zeros[i] > ones[i]:
+            epsilon.append(1)
+            gamma.append(0)
+        elif ones[i] > zeros[i]:
+            gamma.append(1)
+            epsilon.append(0)
+    print("gamma = ", gamma)
+    print("epsilon = ", epsilon)
+
+    #convert gamma and epsilon from binary
+    gamma1 = "".join([str(x) for x in gamma])
+    print(gamma1)
+    epsilon1 = "".join([str(x) for x in epsilon])
+    print(epsilon1)
+    gamma2 = int(gamma1, 2)
+    epsilon2 = int(epsilon1, 2)
+    print(gamma2, epsilon2)
+
+    #caluclate power and return
+    power = gamma2 * epsilon2
+    print("power consumption is ", power)
+    return power
+
+find_gamma(day3)
+# got 942, 3152 for gamma, epsilon
+# got power 2972336
+
+
+## Day 3 Part 2 ##
