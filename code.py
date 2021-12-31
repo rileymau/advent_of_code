@@ -316,4 +316,5 @@ def find_life_support(lst):
     return life
 
 find_life_support(day3)
-# got
+# got 931, 3618 for oxygen, scrubber
+# got life support 3368358
