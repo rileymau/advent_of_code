@@ -218,7 +218,7 @@ def find_life_support(lst):
     for day in lst:
         if day[0] == '0':
             new.append(day)
-    print("new ", new)
+    #print("new ", new)
 
     def find_oxygen(new, num):
         """recursive, find oxygen number"""
@@ -240,8 +240,8 @@ def find_life_support(lst):
                 zero += 1
             elif day[num] == '1':
                 one += 1
-        print("zero is ", zero)
-        print("one is ", one)
+        #print("zero is ", zero)
+        #print("one is ", one)
 
         # get most common number in the spot
         # or 1 if equal
@@ -254,12 +254,12 @@ def find_life_support(lst):
             new = [x for x in new if x[num] == '1']
 
         # repeat until 1 number left or index == 11
-        print("new is ", new)
+        #print("new is ", new)
         return find_oxygen(new, num + 1)
 
     num = 1
     oxygen = find_oxygen(new, num)
-    print(oxygen)
+    #print(oxygen)
 
     # get scrubber number
     def find_scrubber(newS, numS):
@@ -282,8 +282,8 @@ def find_life_support(lst):
                 zeroS += 1
             elif day[numS] == '1':
                 oneS += 1
-        print("zeroS is ", zeroS)
-        print("oneS is ", oneS)
+        #print("zeroS is ", zeroS)
+        #print("oneS is ", oneS)
 
         # get least common number in the spot
         # or 0 if equal
@@ -296,7 +296,7 @@ def find_life_support(lst):
             newS = [x for x in newS if x[numS] == '0']
 
         # repeat until 1 number left or index == 11
-        print("newS is ", newS)
+        #print("newS is ", newS)
         return find_scrubber(newS, numS + 1)
 
     numS = 0
@@ -318,3 +318,48 @@ def find_life_support(lst):
 find_life_support(day3)
 # got 931, 3618 for oxygen, scrubber
 # got life support 3368358
+
+
+## Day 4 Part 1 ##
+
+#import data
+day4 = open('inputBingo.txt')
+day4 = day4.read()
+
+#assign list to called numbers
+bingo_list = ((day4.split())[0]).split(',')
+winning_num = 0
+print(bingo_list)
+
+# split boards on empty line or line numbers by 5's
+# boards are matrices 5x5, named b000 b001 etc.
+# boards rows are named b0011, x012, x013, x014, x015 is board 1
+# Make a board dictionary
+all_boards = {}
+print(all_boards)
+
+
+
+# the function needs to call each number one at a time, and keep track of boards scores.
+# replace number with number$, and look for $ in each item in each row and column
+
+def bingo_game(all_boards):
+    for num in bingo_list:
+        for board in all_boards:
+            if num in all_boards[board]:
+                pass
+                #replace num with (num + '$')
+        #win_check(all_boards)
+
+
+def win_check(all_boards):
+    for board in all_boards:
+        # check each row
+        # check each column
+        pass
+
+# find bingo card that wins
+# sum numbers in row or column
+# multiply by winning number
+
+## Day 4 Part 2 ##
