@@ -322,6 +322,8 @@ find_life_support(day3)
 
 ## Day 4 Part 1 ##
 
+print('day 4 pt 1')
+
 #import data
 day4 = open('inputBingo.txt')
 day4 = day4.read()
@@ -332,11 +334,22 @@ winning_num = 0
 print(bingo_list)
 
 # split boards on empty line or line numbers by 5's
-# boards are matrices 5x5, named b000 b001 etc.
-# boards rows are named b0011, x012, x013, x014, x015 is board 1
+board_list = (day4.splitlines())[2:]
+
 # Make a board dictionary
-all_boards = {}
-print(all_boards)
+# boards are matrices 5x5
+# boards rows are named b0011, x012, x013, x014, x015 is board 1
+def create_dict(lst):
+    all_boards = {}
+    for i in range(0, ((len(lst) + 1)/6)):
+        all_boards.append(i)
+    for row in lst:
+        pass
+    print(all_boards)
+    return all_boards
+
+create_dict(board_list)
+
 
 
 
