@@ -341,14 +341,27 @@ board_list = (day4.splitlines())[2:]
 # boards rows are named b0011, x012, x013, x014, x015 is board 1
 def create_dict(lst):
     all_boards = {}
-    for i in range(0, ((len(lst) + 1)/6)):
-        all_boards.append(i)
+    n = 0
+    for i in range(0, int((len(lst) + 1)/6)):
+        all_boards[i]=[]
+    # while n < len(lst):
     for row in lst:
-        pass
+        if len(all_boards[n]) < 6:
+            all_boards[n].append(row)
+            pass
+        else:
+            n = n + 1
+            all_boards[n].append(row)
+            pass
+    
+    for key in all_boards:
+        if len(all_boards[key]) < 6:
+            all_boards[key].append('')
     print(all_boards)
     return all_boards
 
 create_dict(board_list)
+
 
 
 
