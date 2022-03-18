@@ -336,9 +336,7 @@ print(bingo_list)
 # split boards on empty line or line numbers by 5's
 board_list = (day4.splitlines())[2:]
 
-# Make a board dictionary
-# boards are matrices 5x5
-# boards rows are named b0011, x012, x013, x014, x015 is board 1
+# Make a board dictionary. Boards are matrices 5x5
 def create_dict(lst):
     all_boards = {}
     n = 0
@@ -361,9 +359,6 @@ def create_dict(lst):
     return all_boards
 
 create_dict(board_list)
-
-
-
 
 
 # the function needs to call each number one at a time, and keep track of boards scores.
